@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/dashboard">
+            
+            User Management System
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link <%= (typeof currentPath !== 'undefined' && currentPath === '/dashboard') ? 'active' : '' %>" href="/dashboard">
+                        
+                        Dashboard
+                    </a>
+                </li>
+                
+                <% if (user.permissions && user.permissions.includes(1)) { %>
+                <li class="nav-item">
+                    <a class="nav-link <%= (typeof currentPath !== 'undefined' && (currentPath === '/users' || currentPath.startsWith('/users'))) ? 'active' : '' %>" href="/users">
+                        
+                        Users
+                    </a>
+                </li>
+                <% } %>
+                
+                <li class="nav-item">
+                    <a class="nav-link <%= (typeof currentPath !== 'undefined' && (currentPath === '/roles' || currentPath.startsWith('/roles'))) ? 'active' : '' %>" href="/roles">
+                        
+                        Roles
+                    </a>
+                </li>
+            </ul>
+            
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                        
+                        <%= user.username %> (<%= user.role_name %>)
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/users/<%= user.id %>">
+                            Profile
+                        </a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/logout">     
+                            Logout
+                        </a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

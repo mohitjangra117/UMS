@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: 'Login - User Management System' }) %>
+<style>
+    body {
+        background-color: #6495ED;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+    .login-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+    .login-header {
+        color: #4169E1;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card login-card border-0">
+                    <div class="card-body p-5">
+                        <div class="text-center mb-4">
+                            
+                            <h2 class="login-header fw-bold">User Management System</h2>
+                            <p class="text-muted">Please sign in to your account</p>
+                        </div>
+                        
+                        <form method="POST" action="/login">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">
+                                    
+                                    Username
+                                </label>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="password" class="form-label">
+                                    
+                                    Password
+                                </label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary w-100 py-2">
+                                <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                            </button>
+                        </form>
+                        
+                        <div class="mt-4 text-center">
+                              <% if (typeof error !== 'undefined' && error) { %>
+                            <div class="alert alert-danger" role="alert">
+                                
+                                <%= error %>
+                            </div>
+                        <% } %>
+                        
+                        <% if (typeof success !== 'undefined' && success) { %>
+                            <div class="alert alert-success" role="alert">
+                                
+                                <%= success %>
+                            </div>
+                        <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <%- include('../partials/scripts') %>
+</body>
+</html>

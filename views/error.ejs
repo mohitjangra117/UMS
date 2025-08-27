@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head', { title: 'Error - User Management System' }) %>
+<body>
+    <% if (user) { %>
+        <%- include('./partials/navigation') %>
+    <% } %>
+    
+    
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="text-center error-page">
+                    <i class="fas fa-exclamation-triangle fa-5x text-warning mb-4"></i>
+                    <h1 class="h2 mb-3 text-center">Oops! Something went wrong</h1>
+                    <p class="lead text-muted mb-4">
+                        <%= message || 'An unexpected error occurred' %>
+                    </p>
+                    
+                    <div class="d-flex justify-content-center gap-3">
+                        <% if (user) { %>
+                        <a href="/dashboard" class="btn btn-primary">
+                            
+                            Go to Dashboard
+                        </a>
+                        <% } else { %>
+                        <a href="/login" class="btn btn-primary">
+                            
+                            Go to Login
+                        </a>
+                        <% } %>
+                        
+                        <button onclick="history.back()" class="btn btn-secondary">
+                            
+                            Go Back
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <%- include('./partials/scripts') %>
+</body>
+</html>

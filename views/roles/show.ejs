@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: 'Role Details - User Management System' }) %>
+<body>
+    <%- include('../partials/navigation') %>
+    
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="h3 mb-0">
+                        
+                        Role Details: <%= role.name %>
+                    </h1>
+                    <div>
+                        <a href="/roles" class="btn btn-secondary me-2">
+                            
+                            Back to Roles
+                        </a>
+                        <% if (user.permissions && user.permissions.includes(6) && !['superadmin', 'admin', 'user'].includes(role.name.toLowerCase())) { %>
+                        <a href="/roles/<%= role.id %>/edit" class="btn btn-primary">
+                            
+                            Edit Role
+                        </a>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            
+                            Role Information
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Role Name:</label>
+                                <p class="form-control-plaintext"><%= role.name %></p>
+                            </div>
+                           
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Description:</label>
+                            <p class="form-control-plaintext">
+                                <%= role.description || 'No description available' %>
+                            </p>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Created:</label>
+                            <p class="form-control-plaintext">
+                                <%= new Date(role.created_at).toLocaleDateString('en-US', { 
+                                    year: 'numeric', 
+                                    month: 'long', 
+                                    day: 'numeric',
+                                    hour: '2-digit',
+                                    minute: '2-digit'
+                                }) %>
+                            </p>
+                        </div>
+                        
+                        <% if (role.updated_at !== role.created_at) { %>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Last Updated:</label>
+                            <p class="form-control-plaintext">
+                                <%= new Date(role.updated_at).toLocaleDateString('en-US', { 
+                                    year: 'numeric', 
+                                    month: 'long', 
+                                    day: 'numeric',
+                                    hour: '2-digit',
+                                    minute: '2-digit'
+                                }) %>
+                            </p>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            
+                            Permissions
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <% if (rolePermissions && rolePermissions.length > 0) { %>
+                            <% rolePermissions.forEach(permission => { %>
+                                <span class="badge bg-success me-1 mb-2 d-inline-flex align-items-center">
+                                    
+                                    <%= permission.name.replace('_', ' ').toUpperCase() %>
+                                </span>
+                            <% }) %>
+                        <% } else { %>
+                            <p class="text-muted mb-0">
+                                
+                                No permissions assigned to this role.
+                            </p>
+                        <% } %>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+    
+    <%- include('../partials/scripts') %>
+</body>
+</html>
